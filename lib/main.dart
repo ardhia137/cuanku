@@ -1,3 +1,4 @@
+import 'package:cuanku/cubit/pemasukan_cubit.dart';
 import 'package:cuanku/cubit/pengeluaran_cubit.dart';
 import 'package:cuanku/screen/homeScreen.dart';
 import 'package:cuanku/screen/tabBarScreen.dart';
@@ -24,6 +25,10 @@ class MyApp extends StatelessWidget {
         ),
          BlocProvider(
           create: (context) => PengeluaranCubit(),
+          
+        ),
+         BlocProvider(
+          create: (context) => PemasukanCubit(),
           
         ),
       ],

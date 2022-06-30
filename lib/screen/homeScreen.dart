@@ -7,12 +7,15 @@ import 'package:cuanku/widget/cardWidget.dart';
 import 'package:cuanku/widget/subcardWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  
+  HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    
     context.read<DataCubit>().getData();
     // context.read<DataCubit>().pengeluaran();
     return Scaffold(
@@ -32,17 +35,21 @@ class HomeScreen extends StatelessWidget {
               BlocBuilder<DataCubit, DataState>(
                 builder: (context, state) {
                   if (state is DataSuccess) {
-                    return ListView.builder(
+                        if (state.data.length <= 0) {
+                          return const Padding(padding: EdgeInsets.only(top: 10),
+                          child: Text("Data Kosong"),
+                          );
+                        } else {
+                          return ListView.builder(
                       padding: EdgeInsets.only(top: 0),
                       physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                      // scrollDirection: Axis.vertical,
-                      // shrinkWrap: false,
+                      shrinkWrap: true,
                       itemCount: state.data.length,
                       itemBuilder: (BuildContext context, int index) {
                         return SubcardWidget(judul: state.data[index].judul,nominal: state.data[index].nominal,kategori: state.data[index].kategori);
                       },
                     );
+                        }
                   } else {
                     return Text('error');
                   }
@@ -58,7 +65,7 @@ class HomeScreen extends StatelessWidget {
             child: FloatingActionButton(
               onPressed: () {
                 // DataServices().getdatalist();
-                DataServices().pengeluaran();
+                DataServices().insertdata();
                 // Navigator.pushNamed(context, '/tabbar');
                 // Add your onPressed code here!
               },

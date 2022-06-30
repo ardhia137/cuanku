@@ -1,4 +1,5 @@
 // import 'package:cuanku/cubit/data_cubit.dart';
+import 'package:cuanku/cubit/pemasukan_cubit.dart';
 import 'package:cuanku/cubit/pengeluaran_cubit.dart';
 import 'package:cuanku/theme.dart';
 import 'package:flutter/material.dart';
@@ -12,11 +13,7 @@ class CardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<PengeluaranCubit>().pengeluaran();
-    // RepositoryProvider.of<DataCubit>(context).pengeluaran();
-    // RepositoryProvider.of<DataCubit>(context).state;
-    // var a = context.read<DataCubit>().pengeluaran();
-    // DataCubit(context.read<DataCubit>().pengeluaran())
-    // context.read<DataCubit>().state;
+    context.read<PemasukanCubit>().pemasukan();
     return Container(
       margin: EdgeInsets.only(top: 15,bottom: 10,left: 15,right: 15),
       padding: EdgeInsets.only(top: 20,bottom: 16,left: 15,right: 15),
@@ -59,15 +56,31 @@ class CardWidget extends StatelessWidget {
                 fontSize: 16
               ),);
             } else {
-              return SizedBox();
+              return  Text("Rp. -",style: whiteTextStyle.copyWith(
+                fontWeight: semibold,
+                fontSize: 16
+              ),);
             }
           },
         ),
               
-               Text("Rp. -",style: whiteTextStyle.copyWith(
+               BlocBuilder<PemasukanCubit, PemasukanState>(
+          builder: (context, state) {
+            // context.read<DataCubit>().pengeluaran();
+            if (state is PemasukanSuccess) {
+              print(state);
+              return Text("Rp. ${formatCurrency.format(state.data)}",style: whiteTextStyle.copyWith(
                 fontWeight: semibold,
                 fontSize: 16
-              ),),
+              ),);
+            } else {
+              return  Text("Rp. -",style: whiteTextStyle.copyWith(
+                fontWeight: semibold,
+                fontSize: 16
+              ),);
+            }
+          },
+        ),
             ],
           )
         ],

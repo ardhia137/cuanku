@@ -10,7 +10,8 @@ abstract class PengeluaranState extends Equatable {
 class PengeluaranInitial extends PengeluaranState {}
 
 class PengeluaranSuccess extends PengeluaranState{
-  var data;
+  var data = 0;
+  
   PengeluaranSuccess(this.data);
   @override
   List<Object> get props => [data];
