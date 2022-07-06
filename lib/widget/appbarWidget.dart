@@ -9,7 +9,7 @@ class AppbarWidget extends StatelessWidget {
   Future get_Data() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     var data = pref.getInt('saldo');
-    return data==null ? '-' : data;
+    return data;
   }
 
   @override
@@ -37,7 +37,7 @@ class AppbarWidget extends StatelessWidget {
             future: get_Data(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               return Text(
-                "Rp. ${formatCurrency.format(snapshot.data)}",
+                "Rp. ${snapshot.data == null ? '-' : formatCurrency.format(snapshot.data)}",
                 style: whiteTextStyle.copyWith(
                   fontWeight: semibold,
                   fontSize: 32,

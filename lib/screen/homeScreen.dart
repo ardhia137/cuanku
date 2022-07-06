@@ -1,5 +1,6 @@
 import 'package:cuanku/cubit/data_cubit.dart';
 import 'package:cuanku/model/dataModel.dart';
+import 'package:cuanku/screen/detailScreen.dart';
 import 'package:cuanku/services/dataServices.dart';
 import 'package:cuanku/theme.dart';
 import 'package:cuanku/widget/appbarWidget.dart';
@@ -37,7 +38,10 @@ class HomeScreen extends StatelessWidget {
                   if (state is DataSuccess) {
                         if (state.data.length <= 0) {
                           return const Padding(padding: EdgeInsets.only(top: 10),
-                          child: Text("Data Kosong"),
+                          child: Text("Data Kosong", style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20
+                          ),),
                           );
                         } else {
                           return ListView.builder(
@@ -46,7 +50,24 @@ class HomeScreen extends StatelessWidget {
                       shrinkWrap: true,
                       itemCount: state.data.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return SubcardWidget(judul: state.data[index].judul,nominal: state.data[index].nominal,kategori: state.data[index].kategori);
+                        return GestureDetector(
+                          onTap: (){
+                             Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  DetailScreen(
+                                    id: state.data[index].id,
+                                    nominal: state.data[index].nominal,
+                                    judul: state.data[index].judul,
+                                    keterangan: state.data[index].deskripsi,
+                                    tanggal: state.data[index].tanggal,
+                                    kategori: state.data[index].kategori,
+                                    
+                                  )));
+                          },
+                          child: SubcardWidget(judul: state.data[index].judul,nominal: state.data[index].nominal,kategori: state.data[index].kategori)
+                        );
                       },
                     );
                         }
@@ -65,8 +86,8 @@ class HomeScreen extends StatelessWidget {
             child: FloatingActionButton(
               onPressed: () {
                 // DataServices().getdatalist();
-                DataServices().insertdata();
-                // Navigator.pushNamed(context, '/tabbar');
+                // DataServices().insertdata();
+                Navigator.pushNamed(context, '/tabbar');
                 // Add your onPressed code here!
               },
               backgroundColor: secondaryColor3,

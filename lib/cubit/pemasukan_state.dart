@@ -9,8 +9,14 @@ abstract class PemasukanState extends Equatable {
 
 class PemasukanInitial extends PemasukanState {}
 class PemasukanSuccess extends PemasukanState{
-  var data = 0;
+  final List <DataModel> data;
   PemasukanSuccess(this.data);
+  @override
+  List<Object> get props => [data];
+}
+class GetPemasukanSuccess extends PemasukanState{
+  var data = 0;
+  GetPemasukanSuccess(this.data);
   @override
   List<Object> get props => [data];
 }

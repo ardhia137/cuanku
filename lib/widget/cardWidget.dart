@@ -67,7 +67,7 @@ class CardWidget extends StatelessWidget {
                BlocBuilder<PemasukanCubit, PemasukanState>(
           builder: (context, state) {
             // context.read<DataCubit>().pengeluaran();
-            if (state is PemasukanSuccess) {
+            if (state is GetPemasukanSuccess) {
               print(state);
               return Text("Rp. ${formatCurrency.format(state.data)}",style: whiteTextStyle.copyWith(
                 fontWeight: semibold,

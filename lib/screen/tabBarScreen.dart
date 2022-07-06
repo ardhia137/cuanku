@@ -23,6 +23,7 @@ class TabBarScreen extends StatelessWidget {
               labelColor: primaryColor,
               unselectedLabelColor: Colors.grey,
               tabs: [
+                // print(index)
                 Tab(
                   child: Text("Pemasukan",style:GoogleFonts.poppins(
                     fontSize: 20,
@@ -44,8 +45,8 @@ class TabBarScreen extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            PemasukanScreen(),
-            PemasukanScreen(),
+            PemasukanScreen(index: 1,),
+            PemasukanScreen(index: 2,),
           ],
         ),
       ),

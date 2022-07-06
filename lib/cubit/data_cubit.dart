@@ -25,4 +25,12 @@ class DataCubit extends Cubit<DataState> {
       emit(DataGagal(e.toString()));
     }
   }
+   void hapusdata({required String nominal,required String id,required String kategori})async{
+    try {
+      List<DataModel>? b = await DataServices().hapus(nominal:nominal,id:id, kategori:kategori);
+      emit(DataSuccess(b!));
+    } catch (e) {
+      print(e);
+    }
+  }
 }
