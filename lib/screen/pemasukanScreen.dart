@@ -62,7 +62,7 @@ class PemasukanScreen extends StatelessWidget {
                 listener: (context, state) {
               if (state is PemasukanSuccess) {
                 Navigator.pushNamedAndRemoveUntil(
-                    context, "/", (route) => false);
+                    context, "/home", (route) => false);
               }
             }, builder: (context, state) {
               return ButtonWidget(

@@ -77,7 +77,7 @@ class DetailScreen extends StatelessWidget {
               BlocConsumer<DataCubit, DataState>(listener: (context, state) {
                 if (state is DataSuccess) {
                   Navigator.pushNamedAndRemoveUntil(
-                      context, "/", (route) => false);
+                      context, "/home", (route) => false);
                 }
               }, builder: (context, state) {
                 return InkWell(

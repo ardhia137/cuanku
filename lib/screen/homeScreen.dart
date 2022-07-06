@@ -8,12 +8,14 @@ import 'package:cuanku/widget/cardWidget.dart';
 import 'package:cuanku/widget/subcardWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatelessWidget {
   
   HomeScreen({Key? key}) : super(key: key);
-
+final formatCurrency =
+      new NumberFormat.currency(symbol: "", decimalDigits: 0);
   @override
   Widget build(BuildContext context) {
     
@@ -67,6 +69,10 @@ class HomeScreen extends StatelessWidget {
                                   )));
                           },
                           child: SubcardWidget(judul: state.data[index].judul,nominal: state.data[index].nominal,kategori: state.data[index].kategori)
+                          // child: Text(state.data[index].judul,style: secondaryTextStyle3.copyWith(
+                          //   fontSize: 40,
+                          //   fontWeight: bold
+                          // ),),
                         );
                       },
                     );
